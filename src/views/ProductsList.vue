@@ -63,24 +63,22 @@ export default {
         // Esta lógica comprueba que el id seleccionado coincide con el id de uno de la lista
         if (productData.id == String(productSelectedId)) {
           // Se añade una validación para asignar el valor contrario en caso de que se quiera quitar el favorito
-            productData.favorite = productData.favorite ? false : true;
-          }
+          productData.favorite = productData.favorite ? false : true;
+        }
 
-        updatedProducts.push(productData)
+        updatedProducts.push(productData);
       }
-      /** 
+      /**
        * No se rerenderizaba de nuevo el componente con el favorito marcado
        * por tanto como solución temporal se vacía el array y se usa nexTick para forzar el re-renderizado
        */
-      this.products = []
-      this.$nextTick(()=>{
+      this.products = [];
+      this.$nextTick(() => {
         this.products = updatedProducts;
-      console.log(this.products);
 
-      // Se comenta código original que es obsoleto, dado que no se necesita return 
-      //return updatedProducts;
-      })
-
+        // Se comenta código original que es obsoleto, dado que no se necesita return
+        //return updatedProducts;
+      });
     },
   },
 };
