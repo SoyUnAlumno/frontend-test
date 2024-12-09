@@ -42,8 +42,8 @@
  * al hacer npm install y luego run serve, daba un fallo  por "Module not found: Error: Can't resolve '@popperjs/core'.
  * Tras hacer una búsqueda en google se ve que hace falta instalar una dependencia más con un comando específico por ser la versión
  * de bootstrap 5 o superior.
- *  fuente: https://stackoverflow.com/questions/57459917/how-to-fix-this-error-module-not-found-cant-resolve-popper-js
- *  comando: npm install @popperjs/core --save
+ * fuente: https://stackoverflow.com/questions/57459917/how-to-fix-this-error-module-not-found-cant-resolve-popper-js
+ * comando: npm install @popperjs/core --save
  */
 
 // The content of imports, data, methods, etc. are all sorted alphabetically
@@ -68,9 +68,20 @@ export default {
       signIn().then((result) => {
         // Saves token in storage
         localStorage.setItem("token", JSON.stringify(result));
-        // Gives user feedback and navigates to home page
-        alert("Se ha logado correctamente");
-        this.$router.push("/");
+ 
+        // Parses jwt to obtain data
+        const parsedToken = JSON.parse(atob(result.token.split(".")[1]));
+
+        // Checks if username is the same as the one contained in the jwt
+        if (parsedToken.user === this.username) {
+          // Gives user feedback and navigates to home page
+          alert("Se ha logado correctamente");
+          this.$router.push("/");
+        } else {
+          alert(
+            "Algún dato es incorrecto. Por favor, revise sus credenciales y vuelva a intentarlo."
+          );
+        }
       });
     },
   },
