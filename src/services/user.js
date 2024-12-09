@@ -1,9 +1,11 @@
+import { postLoginEndpoint } from '../helpers/constants'
+
 /**
  * Makes POST request to handle sign in
  */
 export function signIn() {
   return new Promise((resolve) => {
-    fetch("https://fakestoreapi.com/auth/login", {
+    fetch(postLoginEndpoint, {
       // Se ha añadido el campo headers ya que sin él la petición no funcionaba
       headers: {
         "Content-Type": "application/json",
