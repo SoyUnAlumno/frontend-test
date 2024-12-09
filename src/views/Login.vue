@@ -45,10 +45,10 @@ export default {
     onSignIn() {
       signIn().then((result) => {
         // Saves token in storage
-        sessionStorage.setItem("token", JSON.stringify(result));
-        const obj = JSON.parse(sessionStorage.token);
+        localStorage.setItem("token", JSON.stringify(result));
       });
-      this.$router.push('/home')
+      // Navigates to home page
+      this.$router.push('/' )
     },
   },
 };

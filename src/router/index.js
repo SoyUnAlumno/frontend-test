@@ -9,13 +9,20 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: ProductsList,
+   // component: ProductsList,
+   component: () => import(/* webpackChunkName: "login" */ '../views/ProductsList.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+    meta: { requiresAuth: false }
+  },
+  {
+    path: '/bla',
+    name: 'bla',
+    component: () => import(/* webpackChunkName: "login" */ '../views/ProductsList.vue'),
     meta: { requiresAuth: false }
   }
 ]
@@ -30,7 +37,6 @@ const router = new VueRouter({
 // Route guard
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem(tokenStorageName)
-
   // Si la ruta requiere autenticación
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!token) {
