@@ -12,10 +12,12 @@
       type="text"
       id="username"
       class="form-control mb-2"
+      v-model="username"
       placeholder="Username"
     />
     <input
       type="password"
+      v-model="password"
       id="inputPassword"
       class="form-control mb-4"
       placeholder="Password"
@@ -35,20 +37,41 @@
 </template>
 
 <script>
+/**
+ * Se comenta aquí dado que no se permiten comentarios en el package.json:
+ * al hacer npm install y luego run serve, daba un fallo  por "Module not found: Error: Can't resolve '@popperjs/core'.
+ * Tras hacer una búsqueda en google se ve que hace falta instalar una dependencia más con un comando específico por ser la versión
+ * de bootstrap 5 o superior.
+ *  fuente: https://stackoverflow.com/questions/57459917/how-to-fix-this-error-module-not-found-cant-resolve-popper-js
+ *  comando: npm install @popperjs/core --save
+ */
+
+// The content of imports, data, methods, etc. are all sorted alphabetically
 import { signIn } from "../services/user";
 export default {
   name: "Login",
+  data() {
+    return {
+      password: undefined,
+      username: undefined,
+    };
+  },
   methods: {
-    /**
+    /**,
      * Handles login/signin when the user clicks the Sign in button
      */
     onSignIn() {
+      if (!this.username || !this.password) {
+        alert("Por favor, introduzca ambos campos");
+        return;
+      }
       signIn().then((result) => {
         // Saves token in storage
         localStorage.setItem("token", JSON.stringify(result));
+        // Gives user feedback and navigates to home page
+        alert("Se ha logado correctamente");
+        this.$router.push("/");
       });
-      // Navigates to home page
-      this.$router.push('/' )
     },
   },
 };
