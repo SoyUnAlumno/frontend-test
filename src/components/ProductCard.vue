@@ -2,7 +2,7 @@
   <div class="product-item">
     <!-- se añade clase condicional (favorito en rojo) con v-bind abreviado y una expresión ternaria que usa la prop product (objeto en el cual se agrega el campo favorite si se hace click)-->
     <span :class="[product.favorite ? 'icono selected favorite' : 'icono favorite']" @click="onFavoriteClicked"></span>
-    <img :src="product.image" :alt="product.title" class="product-image"/>
+    <img :src="product.image" :alt="product.title" class="product-image" />
     <h3 class="product-title">{{ product.title }}</h3>
     <p class="product-description">{{ product.description }}</p>
     <p><strong>Price:</strong> ${{ product.price }}</p>
@@ -14,7 +14,7 @@ export default {
   // Clases condicionales, doc de vue: https://v2.vuejs.org/v2/guide/class-and-style
   name: 'ProductCard',
   props: ['product'],
-  data () {
+  data() {
     return {
 
     }
@@ -24,7 +24,7 @@ export default {
     // <span class="icono favorite" @click="onFavoriteClicked"></span>
     // Faltaba un evento @click en el icono del corazón para disparar esta función.
     // Esta función emite un evento para que el padre que oye dispare a su vez el método que necesite
-    onFavoriteClicked () {
+    onFavoriteClicked() {
       // No funcionaba porque estaba en camelCase. Los nombres de eventos siempre debe ir en kebab-case
       // Fuente, la doc de vue: https://v2.vuejs.org/v2/guide/components-custom-events
       this.$emit('product-favorite-clicked', this.product.id)

@@ -9,8 +9,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-   // component: ProductsList,
-   component: () => import(/* webpackChunkName: "login" */ '../views/ProductsList.vue'),
+   component: ProductsList,
+   //component: () => import(/* webpackChunkName: "login" */ '../views/ProductsList.vue'),
     meta: { requiresAuth: true }
   },
   {

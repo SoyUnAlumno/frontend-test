@@ -1,37 +1,25 @@
 <template>
   <form class="form-signin" @submit.prevent="onSignIn">
-    <img
-      class="mb-4"
-      src="../assets/logo.png"
-      alt=""
-      width="100"
-      height="100"
-    />
+    <img class="mb-4" src="../assets/logo.png" alt="" width="100" height="100" />
+
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <input
-      type="text"
-      id="username"
-      class="form-control mb-2"
-      v-model="username"
-      placeholder="Username"
-    />
-    <input
-      type="password"
-      v-model="password"
-      id="inputPassword"
-      class="form-control mb-4"
-      placeholder="Password"
-    />
+    <input type="text" id="username" class="form-control mb-2" v-model="username" placeholder="Username" />
+    <input type="password" v-model="password" id="inputPassword" class="form-control mb-4" placeholder="Password" />
+      <p v-if="!username || !password">
+        <b>Por favor, introduzca:</b>
+      </p>
+      <p  v-if="!username">
+       -Un nombre de usuario
+      </p>
+      <p v-if="!password">
+        -Una contraseña
+      </p>
+
     <button class="btn btn-lg btn-outline-dark btn-block" type="submit">
       <span>Sign in</span>
 
       <!-- Loader -->
-      <span
-        v-if="false"
-        class="spinner-border spinner-border-sm mx-2"
-        role="status"
-        aria-hidden="false"
-      ></span>
+      <span v-if="false" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="false"></span>
     </button>
   </form>
 </template>
@@ -68,11 +56,12 @@ export default {
       signIn().then((result) => {
         // Saves token in storage
         localStorage.setItem("token", JSON.stringify(result));
- 
+
         // Parses jwt to obtain data
         const parsedToken = JSON.parse(atob(result.token.split(".")[1]));
 
         // Checks if username is the same as the one contained in the jwt
+        // El username elegido es: mor_2314
         if (parsedToken.user === this.username) {
           // Gives user feedback and navigates to home page
           alert("Se ha logado correctamente");

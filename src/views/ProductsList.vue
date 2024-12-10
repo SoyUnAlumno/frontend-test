@@ -7,12 +7,9 @@
 
     <div v-if="!loading && !error" class="products">
       <div v-for="product in products" :key="product.id">
-        <product-card
-          v-bind:product="product"
-          v-on:product-favorite-clicked="
-            toggleProductFavorite(products, product.id)
-          "
-        />
+        <product-card v-bind:product="product" v-on:product-favorite-clicked="
+          toggleProductFavorite(products, product.id)
+          " />
       </div>
     </div>
   </div>
