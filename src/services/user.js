@@ -1,22 +1,41 @@
-import { postLoginEndpoint } from '../helpers/constants'
+import { postLoginEndpoint } from "../helpers/constants";
 
 /**
  * Makes POST request to handle sign in
  */
-export function signIn() {
-  return new Promise((resolve) => {
+/**
+ * Handles user sign in
+ * @param {String} username
+ * @param {String} password
+ * @returns
+ */
+export function signIn({ username, password }) {
+  return new Promise((resolve, reject) => {
     fetch(postLoginEndpoint, {
       // Se ha añadido el campo headers ya que sin él la petición no funcionaba
+      // El ejemplo de (https://fakestoreapi.com/). viene sin headers
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
       body: JSON.stringify({
-        username: "mor_2314",
-        password: "83r5^_",
+        username,
+        password,
       }),
     })
-      .then((res) => res.json())
-      .then((jsonResponse) => resolve(jsonResponse));
+      .then((res) => {
+        // Checks if response from back is OK or KO
+        if (res.ok) {
+          // returns the json response after the async process
+          return res.json();
+        } else {
+          // Returns response status to provide the correct feedback
+          reject(res.status);
+        }
+      })
+      .then((jsonResponse) => {
+        // Returns the token
+        resolve(jsonResponse);
+      });
   });
 }

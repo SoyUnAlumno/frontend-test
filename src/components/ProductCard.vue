@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { productFavoriteClickedEventName } from '../helpers/constants'
 export default {
   // Clases condicionales, doc de vue: https://v2.vuejs.org/v2/guide/class-and-style
   name: 'ProductCard',
@@ -27,7 +28,8 @@ export default {
     onFavoriteClicked() {
       // No funcionaba porque estaba en camelCase. Los nombres de eventos siempre debe ir en kebab-case
       // Fuente, la doc de vue: https://v2.vuejs.org/v2/guide/components-custom-events
-      this.$emit('product-favorite-clicked', this.product.id)
+      // Se usa una constante del archivo constants
+      this.$emit(productFavoriteClickedEventName, this.product.id)
     }
   }
 }
