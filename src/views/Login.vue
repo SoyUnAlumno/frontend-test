@@ -33,7 +33,7 @@
  * comando: npm install @popperjs/core --save
  */
 
-// Lo ideal sería no poner textos a fuego y usar i18n, además añadir accesibilidad en todas las maquetas
+// TODO: Lo ideal sería no poner textos a fuego y usar i18n, además añadir accesibilidad en todas las maquetas
 
 // The content of imports, data, methods, etc. are all sorted alphabetically
 import { signIn } from "../services/user";

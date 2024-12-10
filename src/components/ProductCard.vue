@@ -21,8 +21,6 @@ export default {
     }
   },
   methods: {
-    // <span :class="[product.favorite ? 'favorite-icon' : 'icono favorite']" @click="onFavoriteClicked"></span>
-    // <span class="icono favorite" @click="onFavoriteClicked"></span>
     // Faltaba un evento @click en el icono del corazón para disparar esta función.
     // Esta función emite un evento para que el padre que oye dispare a su vez el método que necesite
     onFavoriteClicked() {
